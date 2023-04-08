@@ -129,7 +129,7 @@ int count()
 {
     int count=0;
     tempnode=head;
-    while(tempnode->next!=NULL){
+    while(tempnode!=NULL){
         tempnode=tempnode->next;
         count++;
     }
