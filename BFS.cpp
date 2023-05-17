@@ -1,39 +1,78 @@
 #include <iostream>
 #include <queue>
 #include <vector>
+
 using namespace std;
 
-void bfs(vector<vector<int>>& adj_matrix, int start_vertex) {
-    int num_vertices = adj_matrix.size();
-    vector<bool> visited(num_vertices, false);
-    queue<int> q;
+const int MAX_NODES = 1000;
+int adj_mat[100][100]={0};
+int top=-1;
+int last=-1;
 
-    // Mark the starting vertex as visited and enqueue it
-    visited[start_vertex] = true;
-    q.push(start_vertex);
+void push(int *q,int *num,int index)
+{
+    last++;
+    if(top==-1)top++;
+    q[last]=num[index];
+}
 
-    while (!q.empty()) {
-        // Dequeue a vertex from the queue and visit its neighbors
-        int current_vertex = q.front();
-        cout << current_vertex << " ";
-        q.pop();
-
-        for (int neighbor = 0; neighbor < num_vertices; ++neighbor) {
-            if (adj_matrix[current_vertex][neighbor] == 1 && !visited[neighbor]) {
-                // Mark the neighbor as visited and enqueue it
-                visited[neighbor] = true;
-                q.push(neighbor);
-            }
-        }
+void pop(int *q)
+{
+    cout<<q[top]<<endl;
+    top++;
+    if(top>last){
+        top=-1;
+        last=-1;
     }
 }
 
-int main() {
-    vector<vector<int>> adj_matrix = {{0, 1, 1, 0},
-                                      {1, 0, 1, 1},
-                                      {1, 1, 0, 1},
-                                      {0, 1, 1, 0}};
+void graph(int v1,int v2)
+{
+    adj_mat[v1][v2]=1;
+    adj_mat[v2][v1]=1;
+}
 
-    bfs(adj_matrix, 0); // start BFS from vertex 0
+void bfs(int *num,int start,int n)
+{
+    int i,j,k;
+    int q[MAX_NODES];
+    int visited[5]={0};
+    for(i=0;i<5;i++){
+        if(num[i]==start)break;
+    }
+    push(q,num,i);
+    visited[i]=1;
+    while(top!=-1){
+        pop(q);
+        for(k=0;k<5;k++){
+            if(adj_mat[i][k]==1 && visited[k]==0){
+                push(q,num,k);
+                visited[k]=1;
+            }
+        }
+        for(i=0;i<5;i++)
+            if(num[i]==q[top])break;
+
+    }
+
+}
+
+
+int main() {
+    int i,j,n,x,v1,v2;
+    cout<<"Enter number of vertices: ";
+    cin>>n;
+    cout<<"Enter number of edges: ";
+    cin>>x;
+    int num[n];
+    for(i=0;i<n;i++)
+        cin>>num[i];
+    for(i=0;i<x;i++){
+        cin>>v1>>v2;
+        graph(v1,v2);
+    }
+    bfs(num,1,n);
+
+
     return 0;
 }
