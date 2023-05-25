@@ -45,7 +45,7 @@ void dfs(int *num,int n,int i)
     dfsVisit(num,n,i);
     for(i=0;i<n;i++){
         for(int j=0;j<n;j++){
-            if(adj_mat[i][j]==1 && color[j]==0)
+            if(adj_mat[i][j]==1 && color[i]==0)
             dfsVisit(num,n,i);
         }
     }
@@ -76,30 +76,6 @@ int main()
     for(i=0;i<n;i++)
         if(num[i]==source)break;
     dfs(num,n,i);
-
-    int f_sort[n];
-    for(i=0;i<n;i++){
-        f_sort[i]=num[i];
-    }
-
-    for(i=0;i<n-1;i++){
-        for(j=0;j<n-1;j++){
-            if(f[j+1]>f[j]){
-                temp=f_sort[j];
-                f_sort[j]=f_sort[j+1];
-                f_sort[j+1]=temp;
-
-                temp=f[j];
-                f[j]=f[j+1];
-                f[j+1]=temp;
-            }
-        }
-    }
-    cout<<endl;
-
-    for(i=0;i<n;i++)
-        cout<<f_sort[i]<<" ";
-
-
+    
     return 0;
 }
