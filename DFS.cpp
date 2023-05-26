@@ -45,16 +45,14 @@ void dfs(int *num,int n,int i)
     }
     dfsVisit(num,n,i);
     for(i=0;i<n;i++){
-        for(int j=0;j<n;j++){
-            if(adj_mat[i][j]==1 && color[i]==0)
+        if(color[i]==0)
             dfsVisit(num,n,i);
-        }
     }
 }
 
 int main()
 {
-    int n,x,i,v1,v2,j,temp;
+    int n,x,i,v1,v2,j,temp,source;
     cout<<"Enter number of vertices: ";
     cin>>n;
     cout<<"Enter number of edges: ";
@@ -69,14 +67,11 @@ int main()
         cin>>v1>>v2;
         graph(num,v1,v2,n);
     }
-
-
-    int source;
     cout<<"Enter source vertex: ";
     cin>>source;
     for(i=0;i<n;i++)
         if(num[i]==source)break;
     dfs(num,n,i);
-    
+
     return 0;
 }
