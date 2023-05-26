@@ -115,6 +115,7 @@ int main()
     cin>>source;
     for(i=0;i<n;i++)
         if(num[i]==source)break;
+    cout<<"DFS: ";
     dfs(num,n,i);
     cout<<endl;
     scc(num,n);
