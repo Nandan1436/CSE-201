@@ -37,11 +37,12 @@ void dfsVisit(int *num,int n,int i)
 
 void dfs(int *num,int n,int i)
 {
-    color[100]={0};
-    d[100]={10000000};
-    f[100]={10000000};
-    previous[100]={-1};
-
+    for(int j=0;j<n;j++){
+        color[j]=0;
+        d[i]=100000000;
+        f[i]=10000000;
+        previous[i]={-1};
+    }
     dfsVisit(num,n,i);
     for(i=0;i<n;i++){
         for(int j=0;j<n;j++){
