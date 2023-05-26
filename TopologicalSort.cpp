@@ -53,15 +53,15 @@ void dfsVisit(string *course,int i,int n)
 
 void dfs(string *course,int n)
 {
-    int i,j;
-    color[100]={0};
-    f[100]={1000000};
+    int i;
+    for(i=0;i<n;i++){
+        color[i]=0;
+        f[i]=1000000;
+    }
     t=0;
     for(i=0;i<n;i++){
-        for(j=0;j<n;j++){
-            if(adj_mat[i][j]==1 && color[i]==0)
-                dfsVisit(course,i,n);
-        }
+       if(color[i]==0)
+            dfsVisit(course,i,n);
     }
 }
 
